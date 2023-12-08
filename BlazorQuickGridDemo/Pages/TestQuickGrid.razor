@@ -1,31 +1,38 @@
 ﻿@page "/TestQuickGrid"
 @using Microsoft.AspNetCore.Components.QuickGrid
 
-<h3>QuickGrid</h3>
+<h3>@Title</h3>
 
-<QuickGrid Items="@people">
-    <PropertyColumn Title="Id" Property="@(p => p.Id)" />
+<QuickGrid Items="@people" Pagination="pagination">
+    <PropertyColumn Title="Employee Id" Property="@(p => p.Id)" />
     <PropertyColumn Title="First Name" Property="@(p => p.FirstName)" Sortable="true" />
     <PropertyColumn Title="Last Name" Property="@(p =>p.LastName)" Sortable="true" />
     <PropertyColumn Title="Start Date" Property="@(p =>p.StartDate)" Format="yyyy-MM-dd" Sortable="true" />
 </QuickGrid>
+<Paginator State="@pagination" />
 
 @code {
+    [Parameter]
+    public string? Title { get; set; } = "Employee Roster";
+
+   
     private record PersonRecord(int Id, string FirstName, string LastName, DateOnly StartDate);
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 
     private IQueryable<PersonRecord> people = new[]
     {
-            new PersonRecord(1, "John", "Doe", new DateOnly(2019, 1, 1)),
+            new PersonRecord(1, "Gavin", "Pagey", new DateOnly(2019, 1, 1)),
             new PersonRecord(2, "Michael", "Shea", new DateOnly(2019, 1, 1)),
             new PersonRecord(3, "Robbie", "Dylan", new DateOnly(2019, 1, 1)),
-            new PersonRecord(4, "Jane", "Smith", new DateOnly(2019, 1, 1)),
-            new PersonRecord(5, "John", "Doe", new DateOnly(2019, 1, 1)),
+            new PersonRecord(4, "Sarah", "Roberts", new DateOnly(2019, 1, 1)),
+            new PersonRecord(5, "Jesse", "Davis", new DateOnly(2019, 1, 1)),
             new PersonRecord(6, "Christina", "Karstens", new DateOnly(2019, 9, 1)),
             new PersonRecord(7, "John", "Smith", new DateOnly(2019, 1, 1)),
             new PersonRecord(8, "Jane", "McClintock", new DateOnly(2019, 1, 1)),
             new PersonRecord(9, "John", "Emerson", new DateOnly(2019, 1, 1)),
-            new PersonRecord(10, "June", "Peter", new DateOnly(2019, 1, 1)),
-            new PersonRecord(11, "John", "Smith", new DateOnly(2019, 1, 1)),
+            new PersonRecord(10, "June", "Peters", new DateOnly(2019, 1, 1)),
+            new PersonRecord(11, "John", "Carrick", new DateOnly(2019, 1, 1)),
             new PersonRecord(12, "Nancy", "Noah", new DateOnly(2019, 1, 4)),
             new PersonRecord(13, "John", "Doe", new DateOnly(2019, 1, 1)),
             new PersonRecord(14, "Shelly", "Rue", new DateOnly(2019, 1, 1)),
@@ -42,7 +49,7 @@
             new PersonRecord(4, "Michael", "Been", new DateOnly(2019, 1, 1)),
             new PersonRecord(5, "Jim", "Bahr", new DateOnly(2012, 12, 1)),
             new PersonRecord(6, "Nancy", "Johnston", new DateOnly(2019, 1, 1)),
-            new PersonRecord(7, "John", "Smith", new DateOnly(2019, 1, 1)),
+            new PersonRecord(7, "Brent", "Smith", new DateOnly(2019, 1, 1)),
             new PersonRecord(8, "Jane", "Smith", new DateOnly(2019, 1, 1)),
             new PersonRecord(9, "John", "Doe", new DateOnly(2019, 1, 1)),
             new PersonRecord(10, "Jane", "Doe", new DateOnly(2019, 1, 1)),
@@ -50,13 +57,27 @@
             new PersonRecord(12, "Jane", "Smith", new DateOnly(2019, 1, 1)),
             new PersonRecord(13, "John", "Doe", new DateOnly(2019, 1, 1)),
             new PersonRecord(14, "Ed", "Elwin", new DateOnly(2019, 8, 1)),
-            new PersonRecord(15, "John", "Smith", new DateOnly(2019, 1, 1)),
+            new PersonRecord(15, "John", "Spenser", new DateOnly(2019, 1, 1)),
             new PersonRecord(16, "Jane", "Smith", new DateOnly(2019, 1, 1)),
             new PersonRecord(17, "John", "Doe", new DateOnly(2019, 1, 1)),
             new PersonRecord(18, "Jane", "Doe", new DateOnly(2019, 9, 1)),
             new PersonRecord(19, "Patricia", "Levelle", new DateOnly(2019,1,1)),
             new PersonRecord(20, "MJ", "Scott", new DateOnly(2017, 10, 1)),
             new PersonRecord(21, "MJ", "Wonder", new DateOnly(2020, 12, 1)),
+            new PersonRecord(9, "Steve", "Exxon", new DateOnly(2019, 1, 1)),
+            new PersonRecord(10, "Kerri", "James", new DateOnly(2019, 1, 1)),
+            new PersonRecord(11, "John", "Barry", new DateOnly(2019, 6, 1)),
+            new PersonRecord(12, "Jane", "Janeway", new DateOnly(2019, 10, 1)),
+            new PersonRecord(13, "Chrisopher", "Pike", new DateOnly(2024, 2, 1)),
+            new PersonRecord(14, "Norman", "Lear", new DateOnly(2019, 8, 1)),
+            new PersonRecord(15, "Patrick", "Crappy", new DateOnly(2019, 1, 1)),
+            new PersonRecord(16, "Jane", "Smith", new DateOnly(2019, 7, 1)),
+            new PersonRecord(17, "Rick", "Cranberry", new DateOnly(2019, 1, 1)),
+            new PersonRecord(18, "Carole", "Peeks", new DateOnly(2019, 9, 1)),
+            new PersonRecord(19, "Patricia", "Levelle", new DateOnly(2019,1,1)),
+            new PersonRecord(20, "MJ", "Scott", new DateOnly(2017, 10, 1)),
+            new PersonRecord(21, "Katie", "Wonder", new DateOnly(2020, 12, 1)),
 
     }.AsQueryable();
+    
 }
